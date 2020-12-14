@@ -6,7 +6,7 @@
 terraform {
   required_providers {
     ibm = {
-      source  = "hashicorp/ibm"
+      source  = "ibm"
       version = "~> 1.0"
     }
   }
