@@ -3,7 +3,14 @@
 #  - Ensure user provided region is valid
 #  - Ensure user provided resource_group is valid
 ##############################################################################
-
+terraform {
+  required_providers {
+    ibm = {
+      source  = "hashicorp/ibm"
+      version = "~> 1.0"
+    }
+  }
+}
 provider "ibm" {
   /* Uncomment ibmcloud_api_key while testing from CLI */
   // ibmcloud_api_key = var.api_key
