@@ -5,16 +5,12 @@ import os
 import json
 import pip
 
-def install_yaml():
-    if hasattr(pip, 'main'):
-        pip.main(['install'], 'wheel')
-        pip.main(['install'], 'pyyaml')
-    else:
-        pip._internal_main(['install', 'wheel'])
-        pip._internal_main(['install', 'pyyaml'])
+def install_package(package_name):
+    pip._internal_main(['install', package_name])
 
 def main():
-    install_yaml()
+    install_package('wheel')
+    install_package('pyyaml')
     # jsondata = json.loads(sys.stdin.read())
     jsondata = {}
     env = os.environ
