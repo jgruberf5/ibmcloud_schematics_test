@@ -3,8 +3,18 @@
 import sys
 import os
 import json
+import pip
+
+def install_yaml():
+    if hasattr(pip, 'main'):
+        pip.main(['install'], 'wheel')
+        pip.main(['install'], 'pyyaml')
+    else:
+        pip._internal_main(['install', 'wheel'])
+        pip._internal_main(['install', 'pyyaml'])
 
 def main():
+    install_yaml()
     # jsondata = json.loads(sys.stdin.read())
     jsondata = {}
     env = os.environ
@@ -13,8 +23,9 @@ def main():
     for pathname in sys.path:
         file_index = 0
         for root,dirs,files in os.walk(pathname):
-            jsondata["pythonpath_%d" % file_index] = root
-            file_index = file_index + 1
+            if 'ansible' not in root:
+                jsondata["pythonpath_%d" % file_index] = root
+                file_index = file_index + 1
     sys.stdout.write(json.dumps(jsondata))
 
 if __name__ == '__main__':
