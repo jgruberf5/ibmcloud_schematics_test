@@ -3,11 +3,17 @@
 import sys
 import os
 import json
-import subprocess
+import pip
+
+from io import StringIO
 
 def install_package(package_name):
-    proc = subprocess.Popen(['pip', 'install', package_name], stdout=subprocess.PIPE)
-    return proc.stdout
+    origin_stdout = sys.__stdout__
+    pip_out = StringIO()   
+    sys.stdout = pip_out
+    pip.main(['install', package_name])
+    sys.stdout = origin_stdout
+    return pip_out.read()
 
 def main():
     jsondata = {}
