@@ -13,12 +13,10 @@ def install_package(package_name):
     sys.stdout = pip_out
     pip.main(['install', package_name])
     sys.stdout = origin_stdout
-    return pip_out.read()
+    return pip_out.readlines()
 
 def main():
     jsondata = {}
-    std_out = install_package('wheel')
-    jsondata['installwheelout'] = std_out.read().replace('\n','|')
     std_out = install_package('pyyaml')
     jsondata['installpyyaml'] = std_out.read().replace('\n','|')
     # jsondata = json.loads(sys.stdin.read())
