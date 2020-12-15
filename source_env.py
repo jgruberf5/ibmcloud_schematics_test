@@ -6,7 +6,7 @@ import json
 import pip
 
 def install_package(package_name):
-    pip._internal_main(['install', package_name])
+    pip.main(['install', package_name])
 
 def main():
     install_package('wheel')
