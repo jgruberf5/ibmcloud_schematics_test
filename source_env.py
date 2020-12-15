@@ -10,6 +10,10 @@ def main():
     env = os.environ
     for v in env.keys():
         jsondata[v] = env[v]
+    modls = []
+    for key in sys.modules.keys():
+        modls.append(key)
+    jsondata['installed_modules'] = modls
     sys.stdout.write(json.dumps(jsondata))
 
 if __name__ == '__main__':
