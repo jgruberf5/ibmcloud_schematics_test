@@ -4,12 +4,6 @@ import sys
 import os
 import json
 
-
-def list_of_packages(startpath):
-    for root, dirs, files in os.walk(startpath):
-
-
-
 def main():
     # jsondata = json.loads(sys.stdin.read())
     jsondata = {}
