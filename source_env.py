@@ -11,7 +11,7 @@ def install_package(package_name):
     origin_stdout = sys.__stdout__
     pip_out = StringIO()   
     sys.stdout = pip_out
-    pip.main(['install', package_name])
+    pip.main(['install', package_name, '--user'])
     sys.stdout = origin_stdout
     return pip_out.readlines()
 
