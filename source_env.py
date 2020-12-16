@@ -9,7 +9,7 @@ from io import StringIO
 
 def install_package(package_name):
     origin_stdout = sys.__stdout__
-    pip_out = StringIO()   
+    pip_out = StringIO()
     sys.stdout = pip_out
     pip.main(['install', package_name, '--user'])
     sys.stdout = origin_stdout
@@ -18,7 +18,7 @@ def install_package(package_name):
 def main():
     jsondata = {}
     std_out = install_package('pyyaml')
-    jsondata['installpyyaml'] = std_out.read().replace('\n','|')
+    jsondata['installpyyaml'] = '|'.join(std_out)
     # jsondata = json.loads(sys.stdin.read())
     env = os.environ
     for v in env.keys():
