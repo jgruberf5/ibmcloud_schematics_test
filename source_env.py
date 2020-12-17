@@ -31,10 +31,12 @@ def main():
         jsondata[v] = env[v]
     for pathname in sys.path:
         file_index = 0
-        for root,dirs,files in os.walk(pathname):
-            if 'ansible' not in root:
-                jsondata["pythonpath_%d" % file_index] = root
-                file_index = file_index + 1
+        jsondata['pythonpath_%d' % file_index] = pathname
+        file_index = file_index +1
+        #for root,dirs,files in os.walk(pathname):
+        #    if 'ansible' not in root:
+        #        jsondata["pythonpath_%d" % file_index] = root
+        #        file_index = file_index + 1
     sys.stdout.write(json.dumps(jsondata))
 
 if __name__ == '__main__':
