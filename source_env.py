@@ -23,8 +23,8 @@ def install_package(package_name):
 
 def main():
     jsondata = {}
-    std_out = install_package('pyyaml')
-    jsondata['installpyyaml'] = '|'.join(std_out)
+    install_package('pyyaml')
+    import yaml
     # jsondata = json.loads(sys.stdin.read())
     env = os.environ
     for v in env.keys():
