@@ -29,8 +29,8 @@ def main():
     env = os.environ
     for v in env.keys():
         jsondata[v] = env[v]
+    file_index = 0
     for pathname in sys.path:
-        file_index = 0
         jsondata['pythonpath_%d' % file_index] = pathname
         file_index = file_index +1
         #for root,dirs,files in os.walk(pathname):
