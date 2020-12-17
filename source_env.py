@@ -7,11 +7,17 @@ import pip
 
 from io import StringIO
 
+INSTALL_DIR = '/tmp/pythonlib'
+
 def install_package(package_name):
+    if not os.path.exists(INSTALL_DIR):
+        os.makedirs(INSTALL_DIR)
+    if INSTALL_DIR not in sys.path:
+        sys.path.append(INSTALL_DIR)
     origin_stdout = sys.__stdout__
     pip_out = StringIO()
     sys.stdout = pip_out
-    pip.main(['install', package_name, '--user'])
+    pip.main(['install', "--install-option=%s" % INSTALL_DIR, package_name])
     sys.stdout = origin_stdout
     return pip_out.readlines()
 
