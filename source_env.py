@@ -42,10 +42,10 @@ def main():
     #            jsondata["pythonpath_%d" % file_index] = root
     #            file_index = file_index + 1
     
-    process = Popen(['/usr/bin/find', '/', '-name', 'openssl'], stdout=PIPE, stderr=subprocess.DEVNULL)
+    process = Popen(['find', '/', '-name', 'openssl'], stdout=PIPE, stderr=subprocess.DEVNULL)
     (output, err) = process.communicate()
     exit_code = process.wait()
-    output = "cmd: /usr/bin/find / -name openssl\noutput:\n %s" % output
+    output = "cmd: find / -name openssl\noutput:\n %s" % output
     jsondata['find_openssl_exit_code'] = exit_code
     jsondata['find_openssl_out'] = base64.b64encode(output.encode('utf-8')).decode('utf-8')
     sys.stdout.write(json.dumps(jsondata))
