@@ -6,7 +6,7 @@ import json
 import pip
 
 from io import StringIO
-from OpenSSL import crypto
+from subprocess import Popen, PIPE
 
 INSTALL_DIR = '/tmp/pythonlib'
 
@@ -38,6 +38,14 @@ def main():
             if 'ansible' not in root:
                 jsondata["pythonpath_%d" % file_index] = root
                 file_index = file_index + 1
+    
+    process = Popen(['/usr/bin/find', '/', '-name', 'openssl'], stdout=PIPE)
+    (output, err) = process.communicate()
+    exit_code = process.wait()
+
+    jsondata['find_openssl_exit_code'] = exit_code
+    for indx, ln in enumerate(output.splitlines()):
+        jsondata["find_open_ssl_line_%d" % indx] = ln
     sys.stdout.write(json.dumps(jsondata))
 
 if __name__ == '__main__':
