@@ -4,6 +4,7 @@ import sys
 import os
 import json
 import pip
+import base64
 
 from io import StringIO
 from subprocess import Popen, PIPE
@@ -44,8 +45,7 @@ def main():
     exit_code = process.wait()
 
     jsondata['find_openssl_exit_code'] = exit_code
-    for indx, ln in enumerate(output.splitlines()):
-        jsondata["find_open_ssl_line_%d" % indx] = ln
+    jsondata["find_open_ssl_out"] = base64.b64encode(output)
     sys.stdout.write(json.dumps(jsondata))
 
 if __name__ == '__main__':
