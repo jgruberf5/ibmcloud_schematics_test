@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import subprocess
 import sys
 import os
 import json
@@ -25,8 +26,8 @@ def install_package(package_name):
 
 def main():
     jsondata = {}
-    install_package('pyyaml')
-    import yaml
+    #install_package('pyyaml')
+    #import yaml
     # jsondata = json.loads(sys.stdin.read())
     env = os.environ
     for v in env.keys():
@@ -40,12 +41,12 @@ def main():
                 jsondata["pythonpath_%d" % file_index] = root
                 file_index = file_index + 1
     
-    process = Popen(['/usr/bin/find', '/', '-name', 'openssl'], stdout=PIPE)
+    process = Popen(['/usr/bin/find', '/usr', '-name', 'openssl'], stdout=PIPE, stderr=subprocess.DEVNULL)
     (output, err) = process.communicate()
     exit_code = process.wait()
 
     jsondata['find_openssl_exit_code'] = exit_code
-    jsondata["find_open_ssl_out"] = base64.b64encode(output)
+    jsondata["find_open_ssl_out"] = base64.b64encode(output).decode('utf-8')
     sys.stdout.write(json.dumps(jsondata))
 
 if __name__ == '__main__':
