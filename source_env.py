@@ -33,20 +33,20 @@ def main():
     for v in env.keys():
         jsondata[v] = env[v]
     file_index = 0
-    for pathname in sys.path:
-        jsondata['pythonpath_%d' % file_index] = pathname
-        #file_index = file_index +1
-        for root,dirs,files in os.walk(pathname):
-            if 'ansible' not in root:
-                jsondata["pythonpath_%d" % file_index] = root
-                file_index = file_index + 1
+    #for pathname in sys.path:
+    #    jsondata['pythonpath_%d' % file_index] = pathname
+    #    #file_index = file_index +1
+    #    for root,dirs,files in os.walk(pathname):
+    #        if 'ansible' not in root:
+    #            jsondata["pythonpath_%d" % file_index] = root
+    #            file_index = file_index + 1
     
     process = Popen(['/usr/bin/find', '/', '-name', 'openssl'], stdout=PIPE, stderr=subprocess.DEVNULL)
     (output, err) = process.communicate()
     exit_code = process.wait()
 
     jsondata['find_openssl_exit_code'] = exit_code
-    jsondata["find_open_ssl_out"] = base64.b64encode(output).decode('utf-8')
+    jsondata['find_open_ssl_out'] = base64.b64encode(output).decode('utf-8')
     sys.stdout.write(json.dumps(jsondata))
 
 if __name__ == '__main__':
