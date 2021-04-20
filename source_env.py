@@ -45,9 +45,9 @@ def main():
     process = Popen(['/usr/bin/find', '/', '-name', 'openssl'], stdout=PIPE, stderr=subprocess.DEVNULL)
     (output, err) = process.communicate()
     exit_code = process.wait()
-
+    output = "cmd: /usr/bin/find / -name openssl\noutput:\n %s" % output
     jsondata['find_openssl_exit_code'] = exit_code
-    jsondata['find_openssl_out'] = base64.b64encode(output).decode('utf-8')
+    jsondata['find_openssl_out'] = base64.b64encode(output.encode('utf-8')).decode('utf-8')
     sys.stdout.write(json.dumps(jsondata))
 
 if __name__ == '__main__':
