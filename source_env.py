@@ -41,7 +41,7 @@ def main():
                 jsondata["pythonpath_%d" % file_index] = root
                 file_index = file_index + 1
     
-    process = Popen(['/usr/bin/find', '/usr', '-name', 'openssl'], stdout=PIPE, stderr=subprocess.DEVNULL)
+    process = Popen(['/usr/bin/find', '/', '-name', 'openssl'], stdout=PIPE, stderr=subprocess.DEVNULL)
     (output, err) = process.communicate()
     exit_code = process.wait()
 
